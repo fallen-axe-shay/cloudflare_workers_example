@@ -1,0 +1,11 @@
+name = "workers"
+type = "javascript"
+
+account_id = "f34df38b278902f7a43fa8f04ad52767"
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2021-11-22"
+kv_namespaces = [
+         { binding = "Coding_Assessment", id = "4960b8d3192f43829d9ed17ff50e8656" }
+]
