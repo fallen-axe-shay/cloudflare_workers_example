@@ -7,5 +7,6 @@ route = ""
 zone_id = ""
 compatibility_date = "2021-11-22"
 kv_namespaces = [
-         { binding = "Coding_Assessment", preview_id = "23584958716440b5953dc85e17e2a3da", id = "4960b8d3192f43829d9ed17ff50e8656" }
+         { binding = "Coding_Assessment", preview_id = "23584958716440b5953dc85e17e2a3da", id = "4960b8d3192f43829d9ed17ff50e8656" },
+         { binding = "Users", preview_id = "3c5221b496a24b4da207455cc85d52bb", id = "18756be184a24af48e401f5cebb39335" }
 ]

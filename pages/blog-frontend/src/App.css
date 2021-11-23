@@ -51,3 +51,14 @@ html, body, #root, .App, #root>div {
   margin-top: 25px;
   align-self: center;
 }
+
+.errorText {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.errorText>span {
+  color: red;
+  text-align: center;
+}

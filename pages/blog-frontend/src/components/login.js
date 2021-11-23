@@ -4,22 +4,22 @@ import Button from 'react-bootstrap/Button';
 import { FormControl } from "react-bootstrap";
 import { InputGroup } from "react-bootstrap";
 
-const Post = ({ id }) => {
-  const [post, setPost] = useState({});
+const Login = () => {
+  // const [post, setPost] = useState({});
 
-  useEffect(() => {
-    const getPost = async () => {
-      const resp = await fetch(
-        `http://127.0.0.1:8787/posts/${id}`
-      );
-      const postResp = await resp.json();
-      setPost(postResp);
-    };
+  // useEffect(() => {
+  //   const getPost = async () => {
+  //     const resp = await fetch(
+  //       `http://127.0.0.1:8787/posts/${id}`
+  //     );
+  //     const postResp = await resp.json();
+  //     setPost(postResp);
+  //   };
 
-    getPost();
-  }, [id]);
+  //   getPost();
+  // }, [id]);
 
-  if (!Object.keys(post).length) return <div />;
+  // if (!Object.keys(post).length) return <div />;
 
   return (
       <div className="d-flex justify-content-center login-component"> 
@@ -48,4 +48,4 @@ const Post = ({ id }) => {
   );
 };
 
-export default Post;
+export default Login;
