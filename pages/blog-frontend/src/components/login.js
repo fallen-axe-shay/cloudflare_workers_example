@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { FormControl } from "react-bootstrap";
 import { InputGroup } from "react-bootstrap";
 import { Redirect } from '@reach/router';
+import Cookies from 'universal-cookie';
 
 class Login extends Component {
   constructor(props, context) {
@@ -15,8 +16,13 @@ class Login extends Component {
       redirect: false
   };
     this.handleClick = this.handleClick.bind(this);
+    this.cookies = new Cookies();
+    if(this.cookies.get('username')) {
+      var temp = this.state;
+      temp.redirect = true;
+      this.setState(temp);
+    }  
   }
-
   handleClick = () => {
     var temp;
 
@@ -44,7 +50,7 @@ class Login extends Component {
           temp.redirect = true;
         }
         this.setState(temp);
-        console.log(results);
+        this.cookies.set('username', '@' + this.state.username, { path: '/' });
       }
       getLogin();
   }
