@@ -49,7 +49,7 @@ class Signup extends Component {
         } else if (results.code === '105') {
           temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
         } else {
-          temp.error = true;
+          temp.error = null;
           temp.redirect = true;
         }
         this.setState(temp);
