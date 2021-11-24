@@ -94,7 +94,7 @@ render() {
       <Button onClick={()=>{this.handleClick()}}>Login</Button>
       <span>New User? <a href="/signup">Signup Here!</a></span>
       {this.state.error}
-      { this.state.redirect ? (<Redirect noThrow={true} to="/posts"/>) : null }
+      { this.state.redirect ? (<Redirect noThrow={true} to="/content"/>) : null }
   </div>
     </div>
   

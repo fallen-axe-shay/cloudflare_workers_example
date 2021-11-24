@@ -121,35 +121,12 @@ class Signup extends Component {
               </InputGroup>
           <Button onClick={()=>{this.handleClick()}}>Sign Up</Button>
           {this.state.error}
-          { this.state.redirect ? (<Redirect noThrow={true} to="/posts"/>) : null }
+          { this.state.redirect ? (<Redirect noThrow={true} to="/content"/>) : null }
       </div>
         </div>
       
     )
   };
 }
-
-// const Signup = () => {
-//   const [credentials, setCred] = useState({});
-
-//   useEffect(() => {
-//     // const getPost = async () => {
-//     //   const resp = await fetch(
-//     //     `http://127.0.0.1:8787/posts/${id}`
-//     //   );
-//     //   const postResp = await resp.json();
-//     //   setPost(postResp);
-//     // };
-
-//     // getPost();
-//     setCred({'username':null, 'password': null});
-//   }, []);
-
-//   // if (!Object.keys(post).length) return <div />;
-//   function verifyData () {
-//     console.log("Here")
-//   }
-  
-// };
 
 export default Signup;

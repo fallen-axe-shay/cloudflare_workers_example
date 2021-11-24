@@ -62,3 +62,93 @@ html, body, #root, .App, #root>div {
   color: red;
   text-align: center;
 }
+
+.navbar-brand {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.container-posts {
+  margin-top: 20px;
+  padding: 20px;
+  margin-right: 500px;
+}
+
+.username {
+  padding: 10px;
+  color: white;
+}
+
+.post {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 10px;
+  border: rgb(224, 224, 224) solid;
+  margin-bottom: 20px;
+}
+
+.post > .title {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.post > .post-username {
+  color: gray;
+  font-weight: lighter;
+}
+
+.post > .post-content {
+  color: black;
+}
+
+.post > .post-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  object-fit:scale-down;
+  max-height: 300px;
+}
+
+.write-post {
+  border-left: rgb(194, 194, 194) solid;
+  z-index: 10;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 500px;
+  height: calc(100% - 60px);
+  margin-top: 60px;
+  background-color: white;
+  padding: 20px;
+}
+
+.new-post > div > span {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.write-post-form {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.write-post-form > Button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.new-post-container {
+  height: 100%;
+}
+
+.log-out-button {
+  cursor: pointer;
+}
+
+.successText {
+  text-align: center;
+}
+
+.successText>span {
+  color: green;
+  text-align: center;
+}

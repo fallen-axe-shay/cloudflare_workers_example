@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "@reach/router";
+import { logo } from './../logo.svg';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -19,12 +20,13 @@ const Posts = () => {
 
   return (
     <div>
-      <h1>Posts</h1>
       {posts.map((post) => (
-        <div key={post.id}>
-          <h2>
-            <Link to={`http://127.0.0.1:8787/posts/${post.id}`}>{post.title}</Link>
-          </h2>
+        <div key={post.id} className="d-flex flex-column post">
+            <span className="title">{post.title}</span>
+            <span className="post-username">{post.username}</span>
+            <hr/>
+            {post.id==='123' ? (<img src="logo512.png" alt="Post Image" className="post-image"></img>): null}
+            <span className="post-content">{post.content}</span>
         </div>
       ))}
     </div>

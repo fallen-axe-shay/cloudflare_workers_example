@@ -81,25 +81,45 @@ async function loginUser(request) {
   return new Response(JSON.stringify(JSONdata), {status: 200})
 }
 
-function postData(request) {
+async function postData(request) {
   //Generate POST response
-  let JSONdata = {
-    name: "gffd",
-    id: "123"
+  let JSONdata;
+  try {
+    let data = await request.json();
+    let posts = await Posts.get("posts");
+    if (posts == null) {
+      posts = [];
+    } else {
+      posts = JSON.parse(posts);
+    }
+    var temp = {};
+    temp['username'] = data['username'];
+    temp['title'] = data['title'];
+    temp['content'] = data['content'];
+    posts.push(temp);
+    await Posts.put("posts", JSON.stringify(posts));
+    JSONdata = {
+      status: "200",
+      message: "Successfully Posted Content"
+    }
+  } catch (ex) {
+    JSONdata = {
+      status: "105",
+      message: ex.toString()
+    }
   }
   return new Response(JSON.stringify(JSONdata), {status: 200})
 }
 
-function readData(request) {
+async function readData(request) {
   //Generate GET response
-  let JSONdata = { 
-    posts: [
-      {
-        name: "gffd",
-        id: "123",
-        title: "asdsad"
-      }
-  ]
-}
+  let JSONdata = await Posts.get("posts");
+  JSONdata = JSON.parse(JSONdata);
+  for(var i=0; i<JSONdata.length; i++) {
+    JSONdata[i]['id'] = i;
+  }
+  JSONdata = {
+    posts: JSONdata
+  }
   return new Response(JSON.stringify(JSONdata), {status: 200})
 }
