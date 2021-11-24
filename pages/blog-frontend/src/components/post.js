@@ -7,7 +7,7 @@ const Post = ({ id }) => {
   useEffect(() => {
     const getPost = async () => {
       const resp = await fetch(
-        `http://127.0.0.1:8787/posts/${id}`
+        `https://workers.jerry-allan-akshay3096.workers.dev/posts/${id}`
       );
       const postResp = await resp.json();
       setPost(postResp);

@@ -28,7 +28,7 @@ class Login extends Component {
 
       //Signup with API call
       const getLogin = async () => {
-        const host = "http://127.0.0.1:8787"
+        const host = "https://workers.jerry-allan-akshay3096.workers.dev"
         const url = host + "/login"
         const body = {
           username: this.state.username,

@@ -27,7 +27,7 @@ class WritePost extends Component {
       var temp;
         //Write Post
         const writePost = async () => {
-          const host = "http://127.0.0.1:8787"
+          const host = "https://workers.jerry-allan-akshay3096.workers.dev"
           const url = host + "/posts"
           const body = {
             username: this.state.username,
