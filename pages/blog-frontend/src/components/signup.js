@@ -27,44 +27,54 @@ class Signup extends Component {
 
   handleClick = () => {
     var temp;
-    if(this.state.password!==this.state.passwordVerify) {
-      temp = this.state;
-      temp.error = <div className="errorText"><span>The passwords do not match. Kindly check the passwords and try again!</span></div>;
-      this.setState(temp);
-    } else {
-      temp = this.state;
-      temp.error = null;
-      this.setState(temp);
-
-      //Signup with API call
-      const postSignup = async () => {
-        const host = "https://workers.jerry-allan-akshay3096.workers.dev"
-        const url = host + "/signup"
-        const body = {
-          username: this.state.username,
-          password: this.state.password
-        }
-        const init = {
-          body: JSON.stringify(body),
-          method: "POST"
-        }
-        const resp = await fetch(url, init);
-        const results = await resp.json();
+    try {
+      if(this.state.password!==this.state.passwordVerify) {
         temp = this.state;
-        if(results.code === '100') {
-          temp.error = <div className="errorText"><span>User already exists. Please login instead.</span></div>;
-        } else if (results.code === '105') {
-          temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
-        } else {
-          temp.error = null;
-          temp.redirect = true;
-        }
+        temp.error = <div className="errorText"><span>The passwords do not match. Kindly check the passwords and try again!</span></div>;
         this.setState(temp);
-        this.cookies.set('username', '@' + this.state.username, { path: '/' });
+      } else if(this.state.password.trim() === "" || this.state.passwordVerify.trim() === "" || this.state.username.trim() === "") {
+        temp = this.state;
+        temp.error = <div className="errorText"><span>Invalid input data.</span></div>;
+        this.setState(temp);
+      } else {
+        temp = this.state;
+        temp.error = null;
+        this.setState(temp);
+
+        //Signup with API call
+        const postSignup = async () => {
+          const host = "https://workers.jerry-allan-akshay3096.workers.dev"
+          const url = host + "/signup"
+          const body = {
+            username: this.state.username,
+            password: this.state.password
+          }
+          const init = {
+            body: JSON.stringify(body),
+            method: "POST"
+          }
+          const resp = await fetch(url, init);
+          const results = await resp.json();
+          temp = this.state;
+          if(results.code === '100') {
+            temp.error = <div className="errorText"><span>User already exists. Please <a href="/">login</a> instead.</span></div>;
+          } else if (results.code === '105') {
+            temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
+          } else {
+            temp.error = null;
+            this.cookies.set('username', '@' + this.state.username, { path: '/' });
+            temp.redirect = true;
+          }
+          this.setState(temp);
+        }
+        postSignup();
       }
-      postSignup();
+    } catch(ex) {
+      temp = this.state;
+      temp.error = <div className="errorText"><span>Invalid input data.</span></div>;
+      this.setState(temp);
     }
-  }
+  } 
   
   render() {
     return (

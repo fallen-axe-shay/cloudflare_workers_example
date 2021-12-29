@@ -27,33 +27,46 @@ class WritePost extends Component {
       var temp;
         //Write Post
         const writePost = async () => {
-          const host = "https://workers.jerry-allan-akshay3096.workers.dev"
-          const url = host + "/posts"
-          const body = {
-            username: this.state.username,
-            title: this.state.title,
-            content: this.state.content
-          }
-          const init = {
-            body: JSON.stringify(body),
-            method: "POST"
-          }
-          const resp = await fetch(url, init);
-          const results = await resp.json();
-          console.log(results);
-          temp = this.state;
-          if (results.status === '105') {
-            temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
-          } else {
-            temp.error = <div className="successText"><span>Post successfully submitted!</span></div>;
-          }
-          this.setState(temp);
-          setInterval(()=> {
+          try {
+            if(this.state.title.trim()!=="" || this.state.content.trim()!=="") {
+              console.log(this.state.title)
+              const host = "https://workers.jerry-allan-akshay3096.workers.dev"
+              const url = host + "/posts"
+              const body = {
+                username: this.state.username,
+                title: this.state.title,
+                content: this.state.content
+              }
+              const init = {
+                body: JSON.stringify(body),
+                method: "POST"
+              }
+              const resp = await fetch(url, init);
+              const results = await resp.json();
+              console.log(results);
+              temp = this.state;
+              if (results.status === '105') {
+                temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
+              } else {
+                temp.error = <div className="successText"><span>Post successfully submitted!</span></div>;
+              }
+              this.setState(temp);
+              setInterval(()=> {
+                temp = this.state;
+                temp.error = null;
+                this.setState(temp);
+                window.location.reload(false);
+                }, 2000);
+            } else {
+              temp = this.state;
+              temp.error = <div className="errorText"><span>Invalid Data.</span></div>;
+              this.setState(temp);
+            }
+          } catch(ex) {
             temp = this.state;
-            temp.error = null;
+            temp.error = <div className="errorText"><span>Invalid Data.</span></div>;
             this.setState(temp);
-            window.location.reload(false);
-            }, 2000);
+          }
         }
         writePost();
     }
@@ -74,7 +87,15 @@ class WritePost extends Component {
                    temp
                 });
             }}
-                value={this.state.title ? this.state.title : ""} />
+                value={this.state.title ? this.state.title : ""} 
+                autoComplete="on"
+                data={["Hello!", "Appreciation Post", "Thank the Developer!", "Jerry is Awesome!"]}
+                renderItem = {item => {
+                  return (
+                    <div>
+                      {item}
+                    </div>
+                  );}}/>
             </div>
             <div className="write-post-form">
                 <Form.Label>Content</Form.Label>
@@ -86,7 +107,8 @@ class WritePost extends Component {
                        temp
                     });
                 }}
-                    value={this.state.content ? this.state.content : ""}/>
+                    value={this.state.content ? this.state.content : ""}
+                    autoComplete="on"/>
             </div>
             <div className="write-post-form">
             <Button onClick={()=>{this.handleClick()}}>Submit</Button>

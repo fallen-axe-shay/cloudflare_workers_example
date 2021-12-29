@@ -28,29 +28,41 @@ class Login extends Component {
 
       //Signup with API call
       const getLogin = async () => {
-        const host = "https://workers.jerry-allan-akshay3096.workers.dev"
-        const url = host + "/login"
-        const body = {
-          username: this.state.username,
-          password: this.state.password
+        try {
+         if(this.state.password.trim() === "" || this.state.username.trim() === "") {
+            temp = this.state;
+            temp.error = <div className="errorText"><span>Invalid input data.</span></div>;
+            this.setState(temp);
+          } else {
+            const host = "https://workers.jerry-allan-akshay3096.workers.dev"
+            const url = host + "/login"
+            const body = {
+              username: this.state.username,
+              password: this.state.password
+            }
+            const init = {
+              body: JSON.stringify(body),
+              method: "POST"
+            }
+            const resp = await fetch(url, init);
+            const results = await resp.json();
+            temp = this.state;
+            if(results.code === '100') {
+              temp.error = <div className="errorText"><span>Invalid username or password.</span></div>;
+            } else if (results.code === '105') {
+              temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
+            } else {
+              temp.error = null;
+              this.cookies.set('username', '@' + this.state.username, { path: '/' });
+              temp.redirect = true;
+            }
+            this.setState(temp);
+          }
+        } catch(ex) {
+          temp = this.state;
+          temp.error = <div className="errorText"><span>Invalid input data.</span></div>;
+          this.setState(temp);
         }
-        const init = {
-          body: JSON.stringify(body),
-          method: "POST"
-        }
-        const resp = await fetch(url, init);
-        const results = await resp.json();
-        temp = this.state;
-        if(results.code === '100') {
-          temp.error = <div className="errorText"><span>Invalid username or password.</span></div>;
-        } else if (results.code === '105') {
-          temp.error = <div className="errorText"><span>An error occured. Please try again later.</span></div>;
-        } else {
-          temp.error = null;
-          temp.redirect = true;
-        }
-        this.setState(temp);
-        this.cookies.set('username', '@' + this.state.username, { path: '/' });
       }
       getLogin();
   }
