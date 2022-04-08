@@ -1,4 +1,4 @@
-# Getting Started
+# Cloudflare Workers Example
 
 ## Frontend
 
